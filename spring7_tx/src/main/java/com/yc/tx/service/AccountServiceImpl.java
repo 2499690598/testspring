@@ -31,7 +31,16 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Integer openAccount(Accounts account, double money) {
-        return null;
+        account.setBalance(money);
+        int accountid=accountsDao.saveAccount(account);
+        OpRecord opRecord=new OpRecord();
+        opRecord.setAccountid(1);
+        opRecord.setOpmoney(1.0);
+        opRecord.setOptype(OpTypes.deposite.getName());
+        opRecord.setOptime(new Timestamp(System.currentTimeMillis()));
+        opRecord.setTransferid(" ");
+        opRecordDao.saveOpRecord(opRecord);
+        return accountid;
     }
 
     @Override
