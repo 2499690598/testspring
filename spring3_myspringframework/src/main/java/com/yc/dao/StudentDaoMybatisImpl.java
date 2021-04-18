@@ -5,7 +5,7 @@ import com.yc.springframework.stereotype.MyRepository;
 import java.util.Random;
 
 //@MyRepository
-public class StudentDaoMybatisImpl implements StudentDao{
+public class StudentDaoMybatisImpl implements StudentDao {
     @Override
     public int add(String name) {
         System.out.println("mybatis添加学生：" + name);

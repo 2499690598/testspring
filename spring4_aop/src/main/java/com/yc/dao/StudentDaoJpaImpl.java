@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Random;
 
 @Repository
-public class StudentDaoJpaImpl implements StudentDao{
+public class StudentDaoJpaImpl implements StudentDao {
 
     @Override
     public int add(String name) {

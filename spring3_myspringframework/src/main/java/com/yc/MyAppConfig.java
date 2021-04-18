@@ -6,7 +6,7 @@ import com.yc.springframework.stereotype.MyComponentScan;
 import com.yc.springframework.stereotype.MyConfiguration;
 
 @MyConfiguration
-@MyComponentScan(basePackages = {"com.yc.bean", "com.yc.biz","com.yc.dao"})
+@MyComponentScan(basePackages = {"com.yc.bean", "com.yc.biz", "com.yc.dao"})
 public class MyAppConfig {
 
 //    @MyBean

@@ -21,7 +21,7 @@ import java.util.UUID;
         readOnly = false,
         timeout = 100,
         rollbackForClassName = {"RuntimeException"})
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountsDao accountsDao;
@@ -32,8 +32,8 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public Integer openAccount(Accounts account, double money) {
         account.setBalance(money);
-        int accountid=accountsDao.saveAccount(account);
-        OpRecord opRecord=new OpRecord();
+        int accountid = accountsDao.saveAccount(account);
+        OpRecord opRecord = new OpRecord();
         opRecord.setAccountid(1);
         opRecord.setOpmoney(1.0);
         opRecord.setOptype(OpTypes.deposite.getName());
@@ -52,14 +52,14 @@ public class AccountServiceImpl implements AccountService{
         opRecord.setOpmoney(money);
         opRecord.setOptype(optype);     //用枚举做这个值（约束值），不容易出错
         opRecord.setOptime(new Timestamp(System.currentTimeMillis()));  //这里是一个Timestamp
-        if(transferid == null){
+        if (transferid == null) {
             opRecord.setTransferid(" ");
-        }else {
+        } else {
             opRecord.setTransferid(transferid);
         }
         opRecordDao.saveOpRecord(opRecord);
 
-        a.setBalance(a.getBalance()+money);
+        a.setBalance(a.getBalance() + money);
         accountsDao.updateAccount(a);
         return a;
     }
@@ -73,14 +73,14 @@ public class AccountServiceImpl implements AccountService{
         opRecord.setOpmoney(money);
         opRecord.setOptype(optype);     //用枚举做这个值（约束值），不容易出错
         opRecord.setOptime(new Timestamp(System.currentTimeMillis()));  //这里是一个Timestamp
-        if(transferid == null){
+        if (transferid == null) {
             opRecord.setTransferid(" ");
-        }else {
+        } else {
             opRecord.setTransferid(transferid);
         }
         opRecordDao.saveOpRecord(opRecord);
 
-        a.setBalance(a.getBalance()-money);
+        a.setBalance(a.getBalance() - money);
         accountsDao.updateAccount(a);
         return a;
     }
@@ -88,8 +88,8 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public Accounts transfer(Accounts inAccount, Accounts outAccount, double money) {
         String uid = UUID.randomUUID().toString();  //转账流水
-        this.deposite(inAccount,money, OpTypes.transfer.getName(),uid);
-        Accounts newAccounts = this.withdraw(outAccount,money,OpTypes.transfer.getName(),uid);
+        this.deposite(inAccount, money, OpTypes.transfer.getName(), uid);
+        Accounts newAccounts = this.withdraw(outAccount, money, OpTypes.transfer.getName(), uid);
         return newAccounts;
     }
 

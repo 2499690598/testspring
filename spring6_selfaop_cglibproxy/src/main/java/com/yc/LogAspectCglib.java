@@ -11,11 +11,11 @@ public class LogAspectCglib implements MethodInterceptor {
 
     private Object target;
 
-    public LogAspectCglib(Object target){
+    public LogAspectCglib(Object target) {
         this.target = target;
     }
 
-    public Object createProxy(){
+    public Object createProxy() {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(this.target.getClass());
         enhancer.setCallback(this);
@@ -29,18 +29,18 @@ public class LogAspectCglib implements MethodInterceptor {
 //        System.out.println("方法中的参数："+args);
 //        System.out.println("要代理的方法："+methodProxy);
 
-        if (method.getName().startsWith("add")){
+        if (method.getName().startsWith("add")) {
             //前置增强
             log();
         }
-        Object returnValue = method.invoke(this.target,args);
+        Object returnValue = method.invoke(this.target, args);
 
         return returnValue;
     }
 
     private void log() {
         System.out.println("===========before advice===========");
-        System.out.println("hello , this is "+new Date());
+        System.out.println("hello , this is " + new Date());
         System.out.println("=======================");
     }
 

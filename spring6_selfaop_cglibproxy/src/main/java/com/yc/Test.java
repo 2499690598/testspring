@@ -11,7 +11,7 @@ public class Test {
         //生成代理
         Object obj = lc.createProxy();
         System.out.println(obj);    //obj.toString()
-        if (obj instanceof StudentBizImpl){
+        if (obj instanceof StudentBizImpl) {
             StudentBizImpl s = (StudentBizImpl) obj;
 
             s.find("张三");

@@ -18,12 +18,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class AccountDaoImpl implements AccountsDao{
+public class AccountDaoImpl implements AccountsDao {
 
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -32,10 +32,10 @@ public class AccountDaoImpl implements AccountsDao{
         String sql = "insert into accounts(balance) values ( ? )";
         KeyHolder keyHolder = new GeneratedKeyHolder(); //生成键的保存器
         jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql,new String[]{"accountid"});
-            ps.setDouble(1,account.getBalance());
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"accountid"});
+            ps.setDouble(1, account.getBalance());
             return ps;
-        },keyHolder);
+        }, keyHolder);
 
         //方案一：用匿名内部类书写
 //        jdbcTemplate.update(new PreparedStatementCreator() {
@@ -52,27 +52,27 @@ public class AccountDaoImpl implements AccountsDao{
     @Override
     public Accounts updateAccount(Accounts account) {
         String sql = "update accounts set balance = ? where accountid = ?";
-        this.jdbcTemplate.update(sql,account.getBalance(),account.getAccountId());
+        this.jdbcTemplate.update(sql, account.getBalance(), account.getAccountId());
         return account;
     }
 
     @Override
     public Accounts findAccount(int accountid) {
         String sql = "select * from accounts where accountid = ? ";
-        return this.jdbcTemplate.queryForObject(sql,(resultSet, rowNum) -> {
+        return this.jdbcTemplate.queryForObject(sql, (resultSet, rowNum) -> {
             Accounts a = new Accounts();
             a.setAccountId(resultSet.getInt("accountid"));
             a.setBalance(resultSet.getDouble("balance"));
             return a;
-        } ,accountid );
+        }, accountid);
     }
 
     @Override
     public List<Accounts> findAll() {
         String sql = "select * from accounts";
 
-        List<Accounts> list = this.jdbcTemplate.query(sql,(resultSet,rowNum) ->{
-            System.out.println("当前读取的是第"+rowNum+"行的数据");
+        List<Accounts> list = this.jdbcTemplate.query(sql, (resultSet, rowNum) -> {
+            System.out.println("当前读取的是第" + rowNum + "行的数据");
             Accounts a = new Accounts();
             a.setAccountId(resultSet.getInt("accountid"));
             a.setBalance(resultSet.getDouble("balance"));
@@ -95,6 +95,6 @@ public class AccountDaoImpl implements AccountsDao{
     @Override
     public void delete(int accountid) {
         String sql = "delete from accounts where accountid = ?";
-        this.jdbcTemplate.update(sql,accountid);
+        this.jdbcTemplate.update(sql, accountid);
     }
 }

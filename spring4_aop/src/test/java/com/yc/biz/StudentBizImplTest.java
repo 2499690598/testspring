@@ -12,24 +12,24 @@ import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = MyAppConfig.class)
-public class StudentBizImplTest{
+public class StudentBizImplTest {
 
     @Autowired
     //@Resource(name = "studentBizImpl")
     private StudentBiz sbi;
 
     @Test
-    public void testAdd(){
+    public void testAdd() {
         sbi.add("张三");
     }
 
     @Test
-    public void testUpdate(){
+    public void testUpdate() {
         sbi.update("张三");
     }
 
     @Test
-    public void testFind(){
+    public void testFind() {
         sbi.find("张三");
     }
 }

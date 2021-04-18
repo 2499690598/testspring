@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-public class StudentBizImpl implements StudentBiz{
+public class StudentBizImpl implements StudentBiz {
 
     private StudentDao studentDao;
 
-    public StudentBizImpl(StudentDao studentDao){
+    public StudentBizImpl(StudentDao studentDao) {
         this.studentDao = studentDao;
     }
 
-    public StudentBizImpl(){
+    public StudentBizImpl() {
 
     }
 

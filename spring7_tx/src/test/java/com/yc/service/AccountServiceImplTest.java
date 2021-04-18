@@ -24,7 +24,7 @@ public class AccountServiceImplTest extends TestCase {
 
     @Test
     public void testOpenAccount() {
-        Integer accountid = accountService.openAccount(new Accounts(),1);
+        Integer accountid = accountService.openAccount(new Accounts(), 1);
         System.out.println(accountid);
         Assert.assertNotNull(accountid);
     }
@@ -33,7 +33,7 @@ public class AccountServiceImplTest extends TestCase {
     public void testDeposite() {
         Accounts a = new Accounts();
         a.setAccountId(6);
-        Accounts aa = accountService.deposite(a,100, OpTypes.deposite.getName(),null);
+        Accounts aa = accountService.deposite(a, 100, OpTypes.deposite.getName(), null);
         System.out.println(aa);
     }
 
@@ -41,7 +41,7 @@ public class AccountServiceImplTest extends TestCase {
     public void testWithdraw() {
         Accounts a = new Accounts();
         a.setAccountId(6);
-        Accounts aa = accountService.withdraw(a,999, OpTypes.withdraw.getName(),null);
+        Accounts aa = accountService.withdraw(a, 999, OpTypes.withdraw.getName(), null);
         System.out.println(aa);
     }
 
@@ -53,7 +53,7 @@ public class AccountServiceImplTest extends TestCase {
         Accounts inA = new Accounts();
         inA.setAccountId(7);
 
-        this.accountService.transfer(inA,out,5);
+        this.accountService.transfer(inA, out, 5);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class AccountServiceImplTest extends TestCase {
     public void testFindById() {
         Accounts a = new Accounts();
         a.setAccountId(6);
-        List<OpRecord>  list = this.accountService.findById(a);
+        List<OpRecord> list = this.accountService.findById(a);
         System.out.println(list);
         System.out.println(list.size());
     }

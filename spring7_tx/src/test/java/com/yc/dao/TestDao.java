@@ -25,7 +25,7 @@ public class TestDao {
     private AccountsDao accountsDao;
 
     @Test
-    public void testDataSource(){
+    public void testDataSource() {
         Assert.assertNotNull(dataSource);
         try {
             System.out.println(dataSource.getConnection());
@@ -35,26 +35,26 @@ public class TestDao {
     }
 
     @Test
-    public void testAccontsDaoImpl(){
+    public void testAccontsDaoImpl() {
         Assert.assertNotNull(accountsDao);
     }
 
     @Test
-    public void testOpenAccounts(){
+    public void testOpenAccounts() {
         Accounts a = new Accounts();
         a.setBalance(10.0);
         int accountid = accountsDao.saveAccount(a);
-        System.out.println("开户成功，新开户头id为:"+accountid);
+        System.out.println("开户成功，新开户头id为:" + accountid);
     }
 
     @Test
-    public void testfindAll(){
+    public void testfindAll() {
         List<Accounts> list = this.accountsDao.findAll();
         System.out.println(list);
     }
 
     @Test
-    public void testFindByid(){
+    public void testFindByid() {
         Accounts a = this.accountsDao.findAccount(4);
         System.out.println(a);
     }

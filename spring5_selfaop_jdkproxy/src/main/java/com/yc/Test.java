@@ -11,7 +11,7 @@ public class Test {
 
         Object obj = la.createProxy();
 
-        if (obj instanceof StudentBiz){
+        if (obj instanceof StudentBiz) {
             StudentBiz sb = (StudentBiz) obj;
             sb.find("张三");
 

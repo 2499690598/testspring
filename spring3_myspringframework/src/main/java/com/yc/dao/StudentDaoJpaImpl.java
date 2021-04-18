@@ -5,7 +5,7 @@ import com.yc.springframework.stereotype.MyRepository;
 import java.util.Random;
 
 @MyRepository
-public class StudentDaoJpaImpl implements StudentDao{
+public class StudentDaoJpaImpl implements StudentDao {
 
     @Override
     public int add(String name) {

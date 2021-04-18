@@ -23,7 +23,7 @@ public class TestOpRecordDao {
     private OpRecordDao accountsDao;
 
     @Test
-    public void testSave(){
+    public void testSave() {
         OpRecord opRecord = new OpRecord();
         opRecord.setAccountid(1);
         opRecord.setOpmoney(1.0);
@@ -34,16 +34,16 @@ public class TestOpRecordDao {
     }
 
     @Test
-    public void testAll(){
+    public void testAll() {
         List<OpRecord> list = accountsDao.findAll();
         //断言查出来的日志长度不会为0
-        Assert.assertNotEquals(0,list.size());
+        Assert.assertNotEquals(0, list.size());
     }
 
     @Test
-    public void testByAccountId(){
+    public void testByAccountId() {
         List<OpRecord> list = accountsDao.findByAccountid(1);
-        Assert.assertNotEquals(0,list.size());
+        Assert.assertNotEquals(0, list.size());
     }
 
 }

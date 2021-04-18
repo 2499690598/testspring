@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PersonBmiTool implements Measurable {
 
-      //算法类，提供计算bmi值的算法
+    //算法类，提供计算bmi值的算法
     public double measure(Object obj) {
         if (obj == null) {
             return 0;

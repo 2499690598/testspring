@@ -2,7 +2,7 @@ package com.yc.tx.bean;
 
 //枚举类型
 public enum OpTypes {
-    deposite("deposite",1),withdraw("withdraw",2),transfer("transfer",3);
+    deposite("deposite", 1), withdraw("withdraw", 2), transfer("transfer", 3);
 
     //枚举对象中的成员变量
     private String name;
