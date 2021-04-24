@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+<p>tzzsb</p>
+<div id="openAccount">
+    <input type="button" id="open" value="开户" @click="open()">
+</div>
+<br/>
+<div id="DepositeAndWithdraw">
+    <input type="text" id="account" placeholder="账户ID" v-model="acc">
+    <input type="text" id="money" placeholder="转入或取出的金额" v-model="mon">
+    <br/>
+    <input type="button" id="Deposite" value="转入" @click="depoi()">
+    <input type="button" id="Withdraw" value="取出" @click="withd()">
+</div>
+<br/>
+<div id="Transfer">
+    <input type="text" id="inAccount" placeholder="转入账户ID" v-model="inAcc">
+    <input type="text" id="outAccount" placeholder="转出账户ID" v-model="outAcc">
+    <input type="text" id="transMoney" placeholder="转账金额" v-model="mon">
+    <br/>
+    <input type="button" id="Trans" value="转账" @click="trans()">
+</div>
+<br/>
+<div id="Check">
+    <input type="text" id="checkAccount" placeholder="想要查询的账户ID" v-model="checkAcc">
+    <br/>
+    <input type="button" id="show" value="查询余额" @click="checkBalance()">
+    <input type="button" id="oprecord" value="查询记录" @click="findOpRecord()">
+</div>
+<script type="text/javascript">
+    var open = new Vue({
+        el:"#openAccount",
+        data:{
+
+        },
+        methods:{
+            open(){
+                axios.get("/open").then( res=> {
+                    alert("账户"+res.data+"开户成功！！！");
+                });
+            }
+        }
+    })
+
+    var depo = new Vue({
+        el:"#DepositeAndWithdraw",
+        data:{
+            acc:'',
+            mon:''
+        },
+        methods:{
+            depoi(){
+                axios({
+                    url:'/depo',
+                    method:'post',
+                    data:{accountId:this.acc,balance:this.mon}
+                }).then( res=>{
+                    alert("已成功向账户"+this.acc+"转入"+this.mon+"元！！！");
+                });
+            },
+            withd(){
+                axios({
+                    url:'/with',
+                    method:'post',
+                    data:{accountId:this.acc,balance:this.mon}
+                }).then( res=>{
+                    alert("已成功从账户"+this.acc+"转出"+this.mon+"元！！！");
+                });
+            }
+
+        }
+    });
+
+    var transer = new Vue({
+        el:"#Transfer",
+        data:{
+            inAcc:'',
+            outAcc:'',
+            mon:''
+        },
+        methods:{
+            trans(){
+                axios.get("/tran",{params:{inAccount:this.inAcc,outAccount:this.outAcc,money:this.mon}}).then( res=> {
+                        alert("成功从账户"+this.outAcc+"向账户"+this.inAcc+"转账"+this.mon+"元!!!");
+                });
+            }
+        }
+    });
+
+    var check = new Vue({
+        el:"#Check",
+        data:{
+            checkAcc:''
+        },
+        methods:{
+            checkBalance(){
+                axios.get("/show",{params:{checkAccount:this.checkAcc}}).then( res=> {
+                    alert("账户"+res.data.accountId+":当前余额为"+res.data.balance+"元");
+                });
+            },
+            findOpRecord(){
+                axios.get("/find",{params:{checkAccount:this.checkAcc}}).then( res=> {
+                    var str = '账户'+res.data[0].accountid+':共'+res.data.length+'记录\n';
+                    for (var i=0;i<res.data.length;i++){
+                        var type;
+                        if (res.data[i].optype == 'deposite'){
+                            type = '存款';
+                        }else if (res.data[i].optype == 'withdraw'){
+                            type = '取款';
+                        }else if (res.data[i].optype == 'transfer'){
+                            type = '转入';
+                        }
+                        str+=(i+1)+'、时间:'+res.data[i].optime+'    类型:'+type+'    金额:'+res.data[i].opmoney+'\n';
+                    }
+                    alert(str);
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>
